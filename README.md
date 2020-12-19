@@ -93,5 +93,15 @@
     }
     ```
 
+- Run below commands from the root directory to build and run the docker image
+
+  - ```
+    docker-compose build
+    ```
+
+  - ```
+    docker-compose up
+    ```
+
     
 
