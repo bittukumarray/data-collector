@@ -1,8 +1,5 @@
 from rest_framework.views import APIView, status
 from rest_framework.response import Response
-from django.db import connection
-import json
-from collections import OrderedDict
 
 
 
@@ -54,6 +51,24 @@ class InsertData(APIView):
 		else:
 			total_data["country"].update({cntry:{"webReq":dvc["webReq"], "timeSpent":dvc["timeSpent"], "device":{dvc["device"]:{"webReq":dvc["webReq"], "timeSpent":dvc["timeSpent"]}}}})
 
-		print("yes")
 		return Response({"data":total_data})
-        
+
+
+
+class QueryData(APIView):
+	def post(self, req):
+		dim=req.data["dim"]
+		dataKey=dim[0]["key"]
+
+		output={"dim":dim}
+
+		if dataKey=="country":
+			if dim[0]["val"] in total_data["country"].keys():
+				output.update({"metrics":[{"key":"webreq", "val":total_data["country"][dim[0]["val"]]["webReq"]},{"key":"timespent", "val":total_data["country"][dim[0]["val"]]["timeSpent"]}]})
+			else:
+				output.update({"metrics":[{"key":"webreq", "val":0},{"key":"timespent", "val":0}]})
+
+		else:
+			output.update({"msg":"Invalid query, kindly enter query for only countries"})
+
+		return Response(output)
