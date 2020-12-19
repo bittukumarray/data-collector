@@ -3,21 +3,7 @@ from rest_framework.response import Response
 
 
 
-class Country:
-
-	def __init__(self, name, webReq=0, timeSpent=0):
-		self.name=name
-		self.webReq=webReq
-		self.timeSpent=timeSpent
-
-class Device:
-	def __init__(self, name, webReq=0, timeSpent=0):
-		self.name=name
-		self.webReq=webReq
-		self.timeSpent=timeSpent 
-
-
-total_data={"webReq":0, "timeSpent":0, "country":{}}
+total_data={"webReq":0, "timeSpent":0, "country":{}} # because I am storing the tree in-memory
 
 
 class InsertData(APIView):
