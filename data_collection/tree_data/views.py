@@ -37,7 +37,7 @@ class InsertData(APIView):
 		else:
 			total_data["country"].update({cntry:{"webReq":dvc["webReq"], "timeSpent":dvc["timeSpent"], "device":{dvc["device"]:{"webReq":dvc["webReq"], "timeSpent":dvc["timeSpent"]}}}})
 
-		return Response({"data":total_data})
+		return Response(total_data)
 
 
 
